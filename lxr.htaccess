@@ -1,0 +1,23 @@
+Options Indexes ExecCGI FollowSymlinks
+
+order deny,allow
+
+<Files ~ (.*\.conf|.*\.pm|fixhashbang|genjavaclasses|genxref)$>
+	deny from all
+</Files>
+
+<IfModule mod_perl.c>
+	<Files ~ (find|search|source|ident|diff)$>
+		SetHandler perl-script
+		PerlHandler Apache::Registry
+		ForceType text/html
+		PerlSendHeader On
+	</Files>
+</IfModule>
+
+<IfModule !mod_perl.c>
+	<Files ~ (find|search|source|ident|diff)$>
+		SetHandler cgi-script
+		ForceType text/html
+	</Files>
+</IfModule>
