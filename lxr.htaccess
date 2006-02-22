@@ -2,7 +2,7 @@ Options Indexes ExecCGI FollowSymlinks
 
 order deny,allow
 
-<Files ~ (.*\.conf|.*\.pm|fixhashbang|genjavaclasses|genxref)$>
+<Files ~ (.*\.conf|.*\.pm|genxref)$>
 	deny from all
 </Files>
 
