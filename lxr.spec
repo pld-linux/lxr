@@ -31,9 +31,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	%{_webapps}/%{_webapp}
 %define		_lxrdir		%{_datadir}/%{_webapp}
 
-# in case _sysconfdir is not in webapps dir, run this replace pattern
-# before copy-pasting to your spec: :%s#%{_sysconfdir}#%{_webapps}/%{_webapp}#g
-
 %description
 The Linux Cross-Reference project is the testbed application
 of a general hypertext cross-referencing tool.
