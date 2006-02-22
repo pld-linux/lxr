@@ -72,12 +72,16 @@
  
  		# Alternatively, this can specify a CVS repository by setting the value to "cvs:"
  		# followed by the path to the repository.  Note this must be file accessible - remote
-@@ -109,7 +110,7 @@
+@@ -109,10 +110,10 @@
  		#     'sourceroot'	=> 'cvs:/hom/karsk/a/CVSROOT/linux',
  
  		# The name to display for this source tree
 -		'sourcerootname' => 'Example',
 +		'sourcerootname' => 'linux',
+ 		
+ 		# Any parameters to the source access method should be specified below
+-		'sourceparams' => {'cachepath' => '/a/path/here'},
++		#'sourceparams' => {'cachepath' => '/a/path/here'},
  
  		# The DBI identifier for the database to use
  		# For mysql, the format is dbi:mysql:dbname=<name>
