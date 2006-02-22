@@ -2,17 +2,20 @@
 Summary:	Linux Cross-Reference
 Name:		lxr
 Version:	0.9.4
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/WWW
 Source0:	http://dl.sourceforge.net/lxr/%{name}-%{version}.tgz
 # Source0-md5:	15846a8be01a792cfd2f6adfb90b3738
 Source1:	%{name}-apache.conf
 Source2:	%{name}.htaccess
-Patch0:		%{name}-conf.patch
-Patch1:		%{name}-mysql5.patch
+Patch0:		%{name}-CVS20060222.patch
+Patch1:		%{name}-conf.patch
+Patch2:		%{name}-mysql5.patch
+Patch3:		%{name}-INC.patch
 URL:		http://lxr.linux.no/
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	sed >= 4.0
 Requires:	ctags
 Requires:	perl-DBI
 #Requires:	perl-DBD-mysql
@@ -40,6 +43,9 @@ of a general hypertext cross-referencing tool.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+sed -i -e 's|@@DATADIR@@|%{_lxrdir}|' genxref
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -56,7 +62,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 
 install %{SOURCE2} $RPM_BUILD_ROOT%{_lxrdir}/.htaccess
 
-install diff find fixhashbang genjavaclasses genxref ident search source Local.pm \
+install diff find genxref ident search source Local.pm \
 	$RPM_BUILD_ROOT%{_lxrdir}/
 
 cp -a lib/LXR $RPM_BUILD_ROOT%{perl_vendorlib}/
@@ -101,8 +107,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_lxrdir}/.htaccess
 %attr(755,root,root) %{_lxrdir}/diff
 %attr(755,root,root) %{_lxrdir}/find
-%attr(755,root,root) %{_lxrdir}/fixhashbang
-%attr(755,root,root) %{_lxrdir}/genjavaclasses
 %attr(755,root,root) %{_lxrdir}/genxref
 %attr(755,root,root) %{_lxrdir}/ident
 %attr(755,root,root) %{_lxrdir}/search
