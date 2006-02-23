@@ -2,13 +2,13 @@
 Summary:	Linux Cross-Reference
 Name:		lxr
 Version:	0.9.4
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/WWW
 Source0:	http://dl.sourceforge.net/lxr/%{name}-%{version}.tgz
 # Source0-md5:	15846a8be01a792cfd2f6adfb90b3738
 Source1:	%{name}-apache.conf
-Source2:	%{name}.htaccess
+Source2:	%{name}-httpd.conf
 Patch0:		%{name}-CVS20060222.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-mysql5.patch
@@ -45,22 +45,23 @@ of a general hypertext cross-referencing tool.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-sed -i -e 's|@@DATADIR@@|%{_lxrdir}|' genxref
+for f in diff find genxref ident search source templates/lxr.conf ; do
+	sed -i -e 's|@@LXRDIR@@|%{_lxrdir}|' \
+	       -e 's|@@PERLVENDOR@@|%{perl_vendorlib}|g' $f
+done
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{perl_vendorlib},%{_lxrdir},/var/lib/%{_webapp}/{swish,glimpse}}
 
-sed -e "s|PERLVENDOR|%{perl_vendorlib}|g" templates/lxr.conf > $RPM_BUILD_ROOT%{_sysconfdir}/lxr.conf
+install templates/lxr.conf $RPM_BUILD_ROOT%{_sysconfdir}/lxr.conf
 ln -s %{_sysconfdir}/lxr.conf $RPM_BUILD_ROOT%{_lxrdir}/
 
 install swish-e.conf $RPM_BUILD_ROOT%{_sysconfdir}/
 ln -s %{_sysconfdir}/swish-e.conf $RPM_BUILD_ROOT%{_lxrdir}/
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
-
-install %{SOURCE2} $RPM_BUILD_ROOT%{_lxrdir}/.htaccess
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 
 install diff find genxref ident search source Local.pm \
 	$RPM_BUILD_ROOT%{_lxrdir}/
@@ -69,15 +70,20 @@ cp -a lib/LXR $RPM_BUILD_ROOT%{perl_vendorlib}/
 cp -a templates/*.{css,html} $RPM_BUILD_ROOT%{_lxrdir}/
 
 %post
-%banner %{name} -e <<EOF                                                        
-###################################################################             
-#                                                                 #             
-# NOTICE:                                                         #             
-# You need one of perl-DBD-mysql, perl-DBD-Pg, perl-DBD-Oracle    #             
-# depending of which database you want to use.                    #             
-#                                                                 #             
-###################################################################             
-EOF                                                                             
+%banner %{name} -e <<EOF
+###################################################################
+#                                                                 #
+# NOTICE:                                                         #
+# You need one of perl-DBD-mysql, perl-DBD-Pg, perl-DBD-Oracle    #
+# depending of which database you want to use.                    #
+#                                                                 #
+# If you are installing for the first time, You will have to      #
+# create the LXR database tables. Look into directory             #
+# %{_docdir}/%{name}-%{version}/initdb-*                          #
+# to find out how to do this for your database.                   #
+#                                                                 #
+###################################################################
+EOF
 
 %triggerin -- apache1
 %webapp_register apache %{_webapp}
@@ -104,7 +110,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,http) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/swish-e.conf
 
 %dir %{_lxrdir}
-%{_lxrdir}/.htaccess
 %attr(755,root,root) %{_lxrdir}/diff
 %attr(755,root,root) %{_lxrdir}/find
 %attr(755,root,root) %{_lxrdir}/genxref
