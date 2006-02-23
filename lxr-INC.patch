@@ -1,11 +1,72 @@
---- lxr-0.9.4/genxref~	2004-07-21 22:44:30.000000000 +0200
-+++ lxr-0.9.4/genxref	2006-02-22 20:32:25.000000000 +0100
+diff -ur lxr-0.9.4/diff lxr-0.9.4-INC/diff
+--- lxr-0.9.4/diff	2006-02-23 16:49:14.000000000 +0100
++++ lxr-0.9.4-INC/diff	2006-02-23 16:49:41.000000000 +0100
+@@ -26,7 +26,7 @@
+ $CVSID = '$Id$ ';
+ 
+ use strict;
+-use lib '.'; # for Local.pm
++use lib '@@LXRDIR@@'; # for Local.pm
+ use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" }; # if LXR modules are in ./lib
+ 
+ use LXR::Common qw(:html);
+diff -ur lxr-0.9.4/find lxr-0.9.4-INC/find
+--- lxr-0.9.4/find	2004-09-02 17:26:42.000000000 +0200
++++ lxr-0.9.4-INC/find	2006-02-23 16:49:47.000000000 +0100
+@@ -26,7 +26,7 @@
+ $CVSID = '$Id$ ';
+ 
+ use strict;
+-use lib '.'; # for Local.pm
++use lib '@@LXRDIR@@'; # for Local.pm
+ use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" }; # if LXR modules are in ./lib
+ 
+ use LXR::Common qw(:html);
+diff -ur lxr-0.9.4/genxref lxr-0.9.4-INC/genxref
+--- lxr-0.9.4/genxref	2006-02-23 16:49:14.000000000 +0100
++++ lxr-0.9.4-INC/genxref	2006-02-23 16:49:35.000000000 +0100
 @@ -16,7 +16,7 @@
  # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  
  use strict;
 -use lib 'lib';
-+use lib '@@DATADIR@@';
++use lib '@@LXRDIR@@';
  use Fcntl;
  use Getopt::Long;
  use IO::Handle;
+diff -ur lxr-0.9.4/ident lxr-0.9.4-INC/ident
+--- lxr-0.9.4/ident	2004-09-02 17:26:42.000000000 +0200
++++ lxr-0.9.4-INC/ident	2006-02-23 16:49:54.000000000 +0100
+@@ -26,7 +26,7 @@
+ $CVSID = '$Id$ ';
+ 
+ use strict;
+-use lib '.'; # for Local.pm
++use lib '@@LXRDIR@@'; # for Local.pm
+ use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" }; # if LXR modules are in ./lib
+ 
+ use LXR::Common qw(:html);
+diff -ur lxr-0.9.4/search lxr-0.9.4-INC/search
+--- lxr-0.9.4/search	2006-02-23 16:49:14.000000000 +0100
++++ lxr-0.9.4-INC/search	2006-02-23 16:50:00.000000000 +0100
+@@ -26,7 +26,7 @@
+ $CVSID = '$Id$ ';
+ 
+ use strict;
+-use lib '.'; # for Local.pm
++use lib '@@LXRDIR@@'; # for Local.pm
+ use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" }; # if LXR modules are in ./lib
+ 
+ use LXR::Common qw(:html);
+diff -ur lxr-0.9.4/source lxr-0.9.4-INC/source
+--- lxr-0.9.4/source	2006-02-23 16:49:14.000000000 +0100
++++ lxr-0.9.4-INC/source	2006-02-23 16:50:12.000000000 +0100
+@@ -27,7 +27,7 @@
+ $CVSID = '$Id$ ';
+ 
+ use strict;
+-use lib '.';    # for Local.pm
++use lib '@@LXRDIR@@';    # for Local.pm
+ use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" };  # if LXR modules are in ./lib
+ 
+ use LXR::Common qw(:html);

@@ -1,5 +1,6 @@
---- lxr-0.9.4/templates/lxr.conf.orig	2005-04-30 23:30:07.000000000 +0200
-+++ lxr-0.9.4/templates/lxr.conf	2006-02-21 17:17:48.000000000 +0100
+diff -ur lxr-0.9.4/templates/lxr.conf lxr-0.9.4-conf/templates/lxr.conf
+--- lxr-0.9.4/templates/lxr.conf	2006-02-23 16:46:00.000000000 +0100
++++ lxr-0.9.4-conf/templates/lxr.conf	2006-02-23 16:48:09.000000000 +0100
 @@ -8,11 +8,11 @@
  
  		# Path to glimpse executables.
@@ -20,11 +21,11 @@
  
  		# Location of the Generic.pm config file
 -		'genericconf' => '/path/to/lib/LXR/Lang/generic.conf',
-+		'genericconf' => 'PERLVENDOR/LXR/Lang/generic.conf',
++		'genericconf' => '@@PERLVENDOR@@/LXR/Lang/generic.conf',
  
  		# Location of the ectags.conf file
 -		'ectagsconf' => '/path/to/lib/LXR/Lang/ectags.conf',
-+		'ectagsconf' => 'PERLVENDOR/LXR/Lang/ectags.conf',
++		'ectagsconf' => '@@PERLVENDOR@@/LXR/Lang/ectags.conf',
   		
   		# Paths for CVS module
    		'cvspath' => '/bin:/usr/local/bin:/usr/bin:/usr/sbin',
@@ -63,7 +64,33 @@
  			},
  		},
  
-@@ -101,7 +101,7 @@
+@@ -81,16 +82,16 @@
+ 		},
+ 
+ 		# Templates used for headers and footers
+-		'htmlhead'       => 'html-head.html',
+-		'htmltail'       => 'html-tail.html',
+-		'htmldir'        => 'html-dir.html',
+-		'htmlident'      => 'html-ident.html',
+-		'htmlident_refs' => 'html-ident-refs.html',
+-		'htmlfind'       => 'html-find.html',
+-		'htmlsearch'     => 'html-search-swish.html',
++		'htmlhead'       => '@@LXRDIR@@/html-head.html',
++		'htmltail'       => '@@LXRDIR@@/html-tail.html',
++		'htmldir'        => '@@LXRDIR@@/html-dir.html',
++		'htmlident'      => '@@LXRDIR@@/html-ident.html',
++		'htmlident_refs' => '@@LXRDIR@@/html-ident-refs.html',
++		'htmlfind'       => '@@LXRDIR@@/html-find.html',
++		'htmlsearch'     => '@@LXRDIR@@/html-search-swish.html',
+ 
+-		'sourcehead'    => 'html-head.html',
+-		'sourcedirhead' => 'html-head.html',
++		'sourcehead'    => '@@LXRDIR@@/html-head.html',
++		'sourcedirhead' => '@@LXRDIR@@/html-head.html',
+ 		'stylesheet'    => 'lxr.css',
+ 
+ 		# sourceroot - where to get the source files from
+@@ -101,7 +102,7 @@
  		#  indexed-src/version2/...
  		# The names of the version directories must match the values for the Version
  		# variable above.
@@ -72,9 +99,9 @@
  
  		# Alternatively, this can specify a CVS repository by setting the value to "cvs:"
  		# followed by the path to the repository.  Note this must be file accessible - remote
-@@ -109,10 +110,10 @@
- 		#     'sourceroot'	=> 'cvs:/hom/karsk/a/CVSROOT/linux',
- 
+@@ -115,10 +116,10 @@
+ 		#     'sourceroot' => 'bk:/some/repository/here',
+ 		
  		# The name to display for this source tree
 -		'sourcerootname' => 'Example',
 +		'sourcerootname' => 'linux',
@@ -85,7 +112,7 @@
  
  		# The DBI identifier for the database to use
  		# For mysql, the format is dbi:mysql:dbname=<name>
-@@ -119,8 +119,8 @@
+@@ -128,18 +129,18 @@
  
  		# If you need to specify the username or password for the database connection,
  		# uncomment the following two lines
@@ -96,7 +123,6 @@
  
  		# If you need multiple lxr configurations in one database, set different table
  		# prefixes for them.
-@@ -127,10 +127,10 @@
  		#  'dbprefix' => 'lxr_',
  
  		# For using glimpse, the directory to store the .glimpse files in is required
