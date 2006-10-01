@@ -2,7 +2,7 @@
 Summary:	Linux Cross-Reference
 Name:		lxr
 Version:	0.9.4
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/WWW
 Source0:	http://dl.sourceforge.net/lxr/%{name}-%{version}.tgz
