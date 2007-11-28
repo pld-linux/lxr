@@ -13,13 +13,13 @@ Patch0:		%{name}-CVS20060222.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-mysql5.patch
 Patch3:		%{name}-INC.patch
-URL:		http://lxr.linux.no/
+URL:		http://sourceforge.net/projects/lxr
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	sed >= 4.0
 Requires:	ctags
-Requires:	perl-DBI
-#Requires:	perl-DBD-mysql
 #Requires:	perl-DBD-Pg
+#Requires:	perl-DBD-mysql
+Requires:	perl-DBI
 Requires:	perl-File-MMagic
 #Requires:	rcs
 Requires:	swish-e >= 2.1
@@ -35,9 +35,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_lxrdir		%{_datadir}/%{_webapp}
 
 %description
-The Linux Cross-Reference project is the testbed application
-of a general hypertext cross-referencing tool.
-(Or the other way around.)
+The Linux Cross-Reference project is the testbed application of a
+general hypertext cross-referencing tool. (Or the other way around.)
 
 %prep
 %setup -q
