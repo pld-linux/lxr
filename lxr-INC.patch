@@ -10,18 +10,6 @@ diff -ur lxr-0.9.4/diff lxr-0.9.4-INC/diff
  use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" }; # if LXR modules are in ./lib
  
  use LXR::Common qw(:html);
-diff -ur lxr-0.9.4/find lxr-0.9.4-INC/find
---- lxr-0.9.4/find	2004-09-02 17:26:42.000000000 +0200
-+++ lxr-0.9.4-INC/find	2006-02-23 16:49:47.000000000 +0100
-@@ -26,7 +26,7 @@
- $CVSID = '$Id$ ';
- 
- use strict;
--use lib '.'; # for Local.pm
-+use lib '@@LXRDIR@@'; # for Local.pm
- use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" }; # if LXR modules are in ./lib
- 
- use LXR::Common qw(:html);
 diff -ur lxr-0.9.4/genxref lxr-0.9.4-INC/genxref
 --- lxr-0.9.4/genxref	2006-02-23 16:49:14.000000000 +0100
 +++ lxr-0.9.4-INC/genxref	2006-02-23 16:49:35.000000000 +0100
@@ -70,3 +58,16 @@ diff -ur lxr-0.9.4/source lxr-0.9.4-INC/source
  use lib do { $0 =~ m{(.*)/} ? "$1/lib" : "lib" };  # if LXR modules are in ./lib
  
  use LXR::Common qw(:html);
+--- lxr-0.9.9/apache2-require.pl~	2011-03-27 17:54:44.000000000 +0200
++++ lxr-0.9.9/apache2-require.pl	2011-04-12 11:16:23.189246238 +0200
+@@ -1,7 +1,7 @@
+-#!/usr/bin/env perl -w
++#!/usr/bin/perl -w
+ @INC=	( @INC
+-		, "."		# <- LXR root directory
+-		, "./lib"	# <- LXR library directory
++		, "@@LXRDIR@@"		# <- LXR root directory
++		, "@@PERLVENDOR@@"	# <- LXR library directory
+ 		);
+ 
+ 1;
