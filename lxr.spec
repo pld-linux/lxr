@@ -38,9 +38,9 @@ general hypertext cross-referencing tool. (Or the other way around.)
 
 %prep
 %setup -q
-#%patch1 -p1
+%patch1 -p1
 %patch3 -p1
-for f in diff find genxref ident search source templates/lxr.conf ; do
+for f in apache2-require.pl diff genxref ident search source templates/lxr.conf ; do
 	sed -i -e 's|@@LXRDIR@@|%{_lxrdir}|' \
 	       -e 's|@@PERLVENDOR@@|%{perl_vendorlib}|g' $f
 done
@@ -49,16 +49,16 @@ done
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{perl_vendorlib},%{_lxrdir},/var/lib/%{_webapp}/{swish,glimpse}}
 
-install templates/lxr.conf $RPM_BUILD_ROOT%{_sysconfdir}/lxr.conf
+install -p templates/lxr.conf $RPM_BUILD_ROOT%{_sysconfdir}/lxr.conf
 ln -s %{_sysconfdir}/lxr.conf $RPM_BUILD_ROOT%{_lxrdir}/
 
-install swish-e.conf $RPM_BUILD_ROOT%{_sysconfdir}/
+install -p swish-e.conf $RPM_BUILD_ROOT%{_sysconfdir}/
 ln -s %{_sysconfdir}/swish-e.conf $RPM_BUILD_ROOT%{_lxrdir}/
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 
-install diff find genxref ident search source Local.pm \
+install -p diff genxref ident search source Local.pm LXRversion.pm apache2-require.pl \
 	$RPM_BUILD_ROOT%{_lxrdir}/
 
 cp -a lib/LXR $RPM_BUILD_ROOT%{perl_vendorlib}/
@@ -97,7 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc BUGS CREDITS.txt HACKING INSTALL initdb-* notes
+%doc BUGS CHANGES CREDITS.txt ChangeLog HACKING INSTALL RELEASING initdb-* robots.txt
 %dir %attr(750,root,http) %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/apache.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf
@@ -106,11 +106,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_lxrdir}
 %attr(755,root,root) %{_lxrdir}/diff
-%attr(755,root,root) %{_lxrdir}/find
 %attr(755,root,root) %{_lxrdir}/genxref
 %attr(755,root,root) %{_lxrdir}/ident
 %attr(755,root,root) %{_lxrdir}/search
 %attr(755,root,root) %{_lxrdir}/source
+%{_lxrdir}/apache2-require.pl
 %{_lxrdir}/*.html
 %{_lxrdir}/*.css
 %{_lxrdir}/*.conf
