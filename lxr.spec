@@ -2,15 +2,15 @@
 Summary:	Linux Cross-Reference
 Name:		lxr
 Version:	0.9.9
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/WWW
 Source0:	http://dl.sourceforge.net/lxr/%{name}-%{version}.tgz
 # Source0-md5:	0424855d7f9c13ff080e4e1cca99273a
 Source1:	%{name}-apache.conf
 Source2:	%{name}-httpd.conf
-Patch1:		%{name}-conf.patch
-Patch3:		%{name}-INC.patch
+Patch0:		%{name}-conf.patch
+Patch1:		%{name}-INC.patch
 URL:		http://sourceforge.net/projects/lxr
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	sed >= 4.0
@@ -38,8 +38,8 @@ general hypertext cross-referencing tool. (Or the other way around.)
 
 %prep
 %setup -q
+%patch0 -p1
 %patch1 -p1
-%patch3 -p1
 for f in apache2-require.pl diff genxref ident search source templates/lxr.conf ; do
 	sed -i -e 's|@@LXRDIR@@|%{_lxrdir}|' \
 	       -e 's|@@PERLVENDOR@@|%{perl_vendorlib}|g' $f
