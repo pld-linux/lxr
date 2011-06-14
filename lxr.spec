@@ -1,12 +1,12 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Linux Cross-Reference
 Name:		lxr
-Version:	0.9.9
+Version:	0.9.10
 Release:	1
 License:	GPL
 Group:		Applications/WWW
 Source0:	http://dl.sourceforge.net/lxr/%{name}-%{version}.tgz
-# Source0-md5:	0424855d7f9c13ff080e4e1cca99273a
+# Source0-md5:	c6e7716a96f1ca9e151b02d5de423c66
 Source1:	%{name}-apache.conf
 Source2:	%{name}-httpd.conf
 Patch0:		%{name}-conf.patch
