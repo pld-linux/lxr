@@ -22,6 +22,7 @@ Requires:	perl-File-MMagic
 #Requires:	rcs
 Requires:	swish-e >= 2.1
 Requires:	webapps
+Suggests:	perl-Linux-KernelSort
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
