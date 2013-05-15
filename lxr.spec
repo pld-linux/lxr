@@ -2,7 +2,7 @@
 Summary:	Linux Cross-Reference
 Name:		lxr
 Version:	0.9.10
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/WWW
 Source0:	http://dl.sourceforge.net/lxr/%{name}-%{version}.tgz
@@ -23,6 +23,7 @@ Requires:	perl-File-MMagic
 Requires:	swish-e >= 2.1
 Requires:	webapps
 Suggests:	perl-Linux-KernelSort
+Conflicts:	apache-base < 2.4.0-1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -87,10 +88,10 @@ EOF
 %triggerun -- apache1 < 1.3.37-3, apache1-base
 %webapp_unregister apache %{_webapp}
 
-%triggerin -- apache < 2.2.0, apache-base
+%triggerin -- apache-base
 %webapp_register httpd %{_webapp}
 
-%triggerun -- apache < 2.2.0, apache-base
+%triggerun -- apache-base
 %webapp_unregister httpd %{_webapp}
 
 %clean
