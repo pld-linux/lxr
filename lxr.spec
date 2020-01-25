@@ -1,4 +1,3 @@
-%include	/usr/lib/rpm/macros.perl
 Summary:	Linux Cross-Reference
 Name:		lxr
 Version:	0.9.10
