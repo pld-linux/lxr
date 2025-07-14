@@ -39,8 +39,8 @@ general hypertext cross-referencing tool. (Or the other way around.)
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 for f in apache2-require.pl diff genxref ident search source templates/lxr.conf ; do
 	sed -i -e 's|@@LXRDIR@@|%{_lxrdir}|' \
 	       -e 's|@@PERLVENDOR@@|%{perl_vendorlib}|g' $f
